@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@vercel/node": "^5.3.7",
     "axios": "^1.6.8"
   }
 }
