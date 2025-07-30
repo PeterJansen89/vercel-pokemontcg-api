@@ -17,18 +17,17 @@ module.exports = async (req, res) => {
     });
 
     const card = response.data?.data?.[0];
-    if (!card) {
-      return res.json({ productId: null });
-    }
+    if (!card) return res.json({ found: false });
 
-    res.json({
-      productId: card.tcgplayer?.productId || null,
-      marketPrice: card.tcgplayer?.prices?.market?.normal || null,
-      cardId: card.id,
+    return res.json({
+      found: true,
       name: card.name,
-      set: card.set?.name || null,
+      set: card.set?.name,
+      id: card.id,
+      productId: card.tcgplayer?.productId || null,
+      marketPrice: card.tcgplayer?.prices?.normal?.market || null
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };
